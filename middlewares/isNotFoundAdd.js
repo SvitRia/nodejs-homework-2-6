@@ -1,5 +1,5 @@
 import { HttpError } from "../helpers/index.js";
-import { contactAddSchema } from "../schema/contacts-schema.js";
+import { contactAddSchema } from "../models/ContactsDB.js";
 
 const isNotFoundAdd = (req, res, next) => {
     const { error } = contactAddSchema.validate(req.body);
