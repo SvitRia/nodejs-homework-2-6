@@ -25,6 +25,8 @@ contactsSchema.post("save", handleSaveError);
 contactsSchema.pre("findOneAndUpdate", addUpdateSettings )
 contactsSchema.post("findOneAndUpdate", handleSaveError )
 
+const Contact = model("contact", contactsSchema);
+
 export const contactAddSchema = Joi.object({
     name: Joi.string().required().messages({
         "any.required": `"name" must be exist`
@@ -47,6 +49,6 @@ export const contactAddFavoriteSchema = Joi.object({
     favorite: Joi.boolean().required()
 });
 
-const Contact = model("contact", contactsSchema);
+
 
 export default Contact;
