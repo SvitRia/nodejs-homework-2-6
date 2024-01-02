@@ -12,8 +12,8 @@ contactsRouter.get('/:id', isValidId, contactsControler.getById);
 
 contactsRouter.delete('/:id', isValidId,  contactsControler.deleteContact )
 
-contactsRouter.put('/:id', isEmptyBody, isNotFoundUpdate, isValidId, contactsControler.updateById);
+contactsRouter.put('/:id', isValidId, isEmptyBody, isNotFoundUpdate,  contactsControler.updateById);
 
-contactsRouter.patch('/:id/favorite',isEmptyBody, isEmptyBody, isValidId, isNotFoundaddFavorite, contactsControler.addFavoriteById)
+contactsRouter.patch('/:id/favorite', isEmptyBody, isValidId, isNotFoundaddFavorite, contactsControler.addFavoriteById)
 
 export default contactsRouter;
