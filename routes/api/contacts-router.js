@@ -1,29 +1,19 @@
 import express from "express";
-
-import contactsService from "../../models/contacts/index.js";
+import contactsControler from "../../controler/contacts-controler.js";
+import {isEmptyBody, isNotFoundAdd, isNotFoundUpdate, isValidId, isNotFoundaddFavorite} from "../../middlewares/index.js";
 
 const contactsRouter = express.Router()
 
-contactsRouter.get('/', async (req, res, next) => {
-  const result = await contactsService.listContacts();
+contactsRouter.get('/', contactsControler.getAll);
 
-  res.json(result);
-})
+contactsRouter.post('/', isEmptyBody, isNotFoundAdd, contactsControler.addContact);
 
-contactsRouter.get('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+contactsRouter.get('/:id', isValidId, contactsControler.getById);
 
-contactsRouter.post('/', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+contactsRouter.delete('/:id', isValidId,  contactsControler.deleteContact )
 
-contactsRouter.delete('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+contactsRouter.put('/:id', isValidId, isEmptyBody, isNotFoundUpdate,  contactsControler.updateById);
 
-contactsRouter.put('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+contactsRouter.patch('/:id/favorite', isEmptyBody, isValidId, isNotFoundaddFavorite, contactsControler.addFavoriteById)
 
 export default contactsRouter;
