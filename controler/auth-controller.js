@@ -1,9 +1,11 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 import User from "../models/Users.js";
 import { HttpError } from "../helpers/index.js";
 import { ctrlWrapper } from "../decorators/index.js";
 
+dotenv.config();
 const { JWT_SECRET } = process.env;
 
 const register = async (req, res) => {
@@ -31,7 +33,6 @@ const login = async (req, res) => {
     if (!user) {
         throw HttpError(401, "Email or password invalid")
     }
-
     const passwordCompare = await bcrypt.compare(password, user.password)
     if (!passwordCompare) {
         throw HttpError(401, "Email or password invalid")
@@ -42,7 +43,8 @@ const login = async (req, res) => {
         id
     };
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "23h" });
-    
+    await User.findByIdAndUpdate(id, {token});
+
     res.json({
         token,
         "user": {

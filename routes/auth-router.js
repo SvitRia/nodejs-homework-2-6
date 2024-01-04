@@ -1,6 +1,6 @@
 import express from "express";
 import userController from "../controler/auth-controller.js";
-import { isEmptyBody, isValidId } from "../middlewares/index.js";
+import { authenticate, isEmptyBody} from "../middlewares/index.js";
 import { validateBody } from "../decorators/index.js";
 import { userRegisterSchema, userLoginSchema} from "../models/Users.js";
 
