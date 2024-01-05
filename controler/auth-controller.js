@@ -53,7 +53,42 @@ const login = async (req, res) => {
         }
     })
 }
+
+const getCurrent = async(req, res)=> {
+    const { email} = req.user;
+
+    res.json({
+        email
+    })
+}
+
+const logout = async(req, res)=> {
+    const {_id} = req.user;
+    await User.findByIdAndUpdate(_id, {token: ""});
+
+    res.json({
+        message: "Logout success"
+    })
+}
+
+const subscription = async (req, res) => {
+    const { subscription } = req.body;
+    const { _id } = req.user;
+    const user = await User.findOne({ _id });
+    await User.findByIdAndUpdate(_id, { subscription });
+    
+    res.json({
+      "user": {
+            email: user.email,
+            subscription
+        }
+    })
+}
+
 export default {
     register: ctrlWrapper(register),
-    login: ctrlWrapper(login)
+    login: ctrlWrapper(login),
+    getCurrent: ctrlWrapper(getCurrent),
+    logout: ctrlWrapper(logout),
+    subscription: ctrlWrapper(subscription)
 }

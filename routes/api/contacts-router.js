@@ -8,6 +8,8 @@ contactsRouter.use(authenticate);
 
 contactsRouter.get('/', contactsControler.getAll);
 
+contactsRouter.get('/favorite', contactsControler.getFavorite)
+
 contactsRouter.post('/', isEmptyBody, isNotFoundAdd, contactsControler.addContact);
 
 contactsRouter.get('/:id', isValidId, contactsControler.getById);

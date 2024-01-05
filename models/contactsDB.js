@@ -8,8 +8,7 @@ const contactsSchema = new Schema({
         required: [true, 'Set name for contact']
     },
     email: {
-        type: String,
-        
+        type: String,   
     },
     phone: {
         type: String,
@@ -18,6 +17,11 @@ const contactsSchema = new Schema({
     favorite: {
         type: Boolean,
         default: false,
+    },
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: "user",
+        required: true
     }
 }, { versionKey: false, timestamps: true });
 
@@ -31,7 +35,7 @@ export const contactAddSchema = Joi.object({
     name: Joi.string().required().messages({
         "any.required": `"name" must be exist`
     }),
-     email: Joi.string().email().required().messages({
+    email: Joi.string().email().required().messages({
         "any.required": `"email" must be exist`
      }),
     phone: Joi.string().min(1).required(),
