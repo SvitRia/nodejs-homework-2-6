@@ -1,5 +1,5 @@
 import { HttpError } from "../helpers/index.js";
-import { contactAddFavoriteSchema } from "../models/ContactsDB.js";
+import { contactAddFavoriteSchema } from "../models/contacts.js";
 
 const isNotFoundaddFavorite = (req, res, next) => {
     const { error } = contactAddFavoriteSchema.validate(req.body);

@@ -1,4 +1,4 @@
-import Contact from "../models/contactsDB.js";
+import Contact from "../models/contacts.js";
 import HttpError from "../helpers/HttpError.js";
 import { ctrlWrapper } from "../decorators/index.js";
 
