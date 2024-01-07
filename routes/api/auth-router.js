@@ -1,8 +1,8 @@
 import express from "express";
-import userController from "../controler/auth-controller.js";
-import { authenticate, isEmptyBody} from "../middlewares/index.js";
-import { validateBody } from "../decorators/index.js";
-import { userRegisterSchema, userLoginSchema, userSubscriptionSchema} from "../models/Users.js";
+import userController from "../../controler/auth-controller.js";
+import { authenticate, isEmptyBody} from "../../middlewares/index.js";
+import { validateBody } from "../../decorators/index.js";
+import { userRegisterSchema, userLoginSchema, userSubscriptionSchema} from "../../models/Users.js";
 
 const authRouter = express.Router();
 

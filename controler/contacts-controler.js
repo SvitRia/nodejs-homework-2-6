@@ -12,10 +12,10 @@ const getAll = async (req, res) => {
 }; 
 
 const addContact = async (req, res) => {
-    const { email } = req.body;
-    const user = await Contact.findOne({email});
-    if(user) {
-        throw HttpError(409, "Email already in use");
+    const { name } = req.body;
+    const contact = await Contact.findOne({name});
+    if(contact) {
+        throw HttpError(409, "Contact with that name already exists");
     }
     const {_id: owner} = req.user;
     const result = await Contact.create({ ...req.body, owner });

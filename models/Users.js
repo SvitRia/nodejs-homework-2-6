@@ -32,7 +32,7 @@ export const userRegisterSchema = Joi.object({
     email: Joi.string().pattern(emailRegexp).required(),
     password: Joi.string().min(8).required(),
     subscription: Joi.string().valid("starter", "pro", "business"),
-    token: Joi.string()
+   
 })
 export const userLoginSchema = Joi.object({
     email: Joi.string().pattern(emailRegexp).required(),
