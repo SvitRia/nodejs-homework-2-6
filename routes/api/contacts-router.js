@@ -1,6 +1,6 @@
 import express from "express";
 import contactsControler from "../../controller/contacts-controler.js";
-import {authenticate, isEmptyBody, isNotFoundAdd, isNotFoundUpdate, isValidId, isNotFoundaddFavorite} from "../../middlewares/index.js";
+import {authenticate, isEmptyBody, isNotFoundAdd, isNotFoundUpdate, isValidId, isNotFoundaddFavorite, upload} from "../../middlewares/index.js";
 
 const contactsRouter = express.Router()
 
@@ -10,7 +10,7 @@ contactsRouter.get('/', contactsControler.getAll);
 
 contactsRouter.get('/favorite', contactsControler.getFavorite)
 
-contactsRouter.post('/', isEmptyBody, isNotFoundAdd, contactsControler.addContact);
+contactsRouter.post('/', upload.single("avatar"), isEmptyBody, isNotFoundAdd, contactsControler.addContact);
 
 contactsRouter.get('/:id', isValidId, contactsControler.getById);
 
