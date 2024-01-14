@@ -1,10 +1,7 @@
-import fs from "fs/promises";
 import Contact from "../models/Сontacts.js";
 import HttpError from "../helpers/HttpError.js";
 import { ctrlWrapper } from "../decorators/index.js";
-import path from "path";
 
-const avatarPath = path.resolve("public", "avatars");
 
 const getAll = async (req, res) => {
     const { _id: owner } = req.user;
@@ -21,13 +18,9 @@ const addContact = async (req, res) => {
     if(contact) {
         throw HttpError(409, "Contact with that name already exists");
     };
-    const { path: oldPath, filename } = req.file;
-    const newPath = path.join(avatarPath, filename)
-    await fs.rename(oldPath, newPath);
-    const avatar = path.join("public", "avatars", filename)
-    console.log(ava)
+    
     const {_id: owner} = req.user;
-    const result = await Contact.create({ ...req.body, avatar, owner });
+    const result = await Contact.create({ ...req.body,  owner });
     res.status(201).json(result)
 };
 
