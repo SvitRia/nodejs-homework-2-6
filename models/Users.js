@@ -46,7 +46,6 @@ export const userLoginSchema = Joi.object({
 export const userSubscriptionSchema = Joi.object({
     subscription: Joi.string().valid("starter", "pro", "business"),
 })
-S
 
 const User = model("user", userSchema);
 
