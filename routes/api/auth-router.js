@@ -16,6 +16,6 @@ authRouter.post("/logout", authenticate, userController.logout)
 
 authRouter.patch("/", authenticate, isEmptyBody, validateBody(userSubscriptionSchema), userController.subscription)
 
-authRouter.patch("/avatar", authenticate, upload.single("avatar"), userController.avatar)
+authRouter.patch("/avatar", authenticate, upload.single("avatar"), userController.updateAvatar)
 
 export default authRouter;

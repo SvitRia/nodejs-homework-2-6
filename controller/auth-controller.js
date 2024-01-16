@@ -91,14 +91,14 @@ const subscription = async (req, res) => {
 }
 const avatarPath = path.resolve("public", "avatars");
 
-const avatar = async (req, res) => {
+const updateAvatar = async (req, res) => {
     
     const { _id } = req.user;
     const user = await User.findOne({ _id });
     const { path: oldPath, filename } = req.file;
 
 await Jimp.read(oldPath).then((avatar) =>
-    avatar.resize(250, 250).write(`${oldPath}`)
+    avatar.resize(250, 250).writeAsync(`${oldPath}`)
   );
   
     const newPath = path.join(avatarPath, filename)
@@ -122,5 +122,5 @@ export default {
     getCurrent: ctrlWrapper(getCurrent),
     logout: ctrlWrapper(logout),
     subscription: ctrlWrapper(subscription),
-    avatar: ctrlWrapper(avatar)
+    updateAvatar: ctrlWrapper(updateAvatar)
 }
